@@ -1,6 +1,3 @@
-# empty-asciidoc-project
-An empty asciidoc project to build pdf file.
+# 同期に関する個人的なメモ
 
-This repository is for my personal use.
-Please take responsibility for your actions if you clone this.
-
+そのうち簡単なプログラミング言語を作りたいなと思っていて，そのための簡単な個人的なメモです。
