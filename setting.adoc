@@ -7,7 +7,7 @@
 :description:
 
 // 書籍名を変更してください
-:docname: My awesome book
+:docname: A Private Note about Synchronization
 :imagesdir: ./images
 :icons: font
 :iconsdir: ./images/icons

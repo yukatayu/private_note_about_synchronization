@@ -3,17 +3,17 @@
 include::setting.adoc[]
 // << Header
 
-= Title
+= 同期に関する個人的なメモ
 
 // Foreword
 
-== Chapter 0
-include::sections/00_sample.adoc[]
+// == Chapter 0
+// include::sections/00_sample.adoc[]
 
-== Chapter 1
-// include sections/*.adoc here
+== 基本アイデア
+include::sections/01_basic.adoc[]
 
-== Chapter 2
+// == Chapter 2
 // include
 
 
