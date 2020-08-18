@@ -1,11 +1,16 @@
-=== 着想
-
 === メモ
 集合:: `A`
 論理クロックを共有する集まり:: `\rm{A}`
 
-=== 2つの場合
+=== 着想
+
+
+==== 2つの場合
 まずAとBの2つだけで考えてみる。
+
+AとBをとりあえず状態グループと呼ぶことにする。
+同じ状態グループに属するノードは1つの「状態」を持つ。但し複数の状態グループに属する場合は，それぞれに状態を持てる。
+その意味では「状態グループ」そのものが状態を持つと考えた方が良さそう。
 
 [NOTE]
 ====
@@ -34,6 +39,89 @@
 これを latexmath:[\rm{A} \rightarrow \rm{B} \land \rm{B} \rightarrow \rm{A}] と考えると，対応する集合は一つに潰れてしまう。
 つまりAとBは1つの状態を持つという事に相当する。それでも整合性は取れるのだが，何も言っていないのと同じなので他の方法を考える。
 
-何も言っていないという事について，「それを言い出したら結局は全体で一つの巨大な状態を持てば良い」という結論になってしまうためである。これは latexmath:[A] と latexmath:[B] を latexmath:[A \setminus B] と latexmath:[B \setminus A] と latexmath:[A \intersect B] に分ければ解決するのだろうか？ つまり任意の2つについて直積は少なくとも存在しそう。
+何も言っていないという事について，「それを言い出したら結局は全体で一つの巨大な状態を持てば良い」という結論になってしまうためである。これは latexmath:[A] と latexmath:[B] を latexmath:[A \setminus B] と latexmath:[B \setminus A] と latexmath:[A \cap B] に分ければ解決するのだろうか？ つまり任意の2つについて「共通部分の集合」に相当する状態グループは少なくとも存在しそう。
 
 NOTE: 考えるべきこととして「この集合の和集合や共通部分が正確には何であるか」などがある。
+
+[line-through]#純粋なノードは全体集合 latexmath:[\mathcal{U}] に属する？# +
+これは間違いで，純粋なノードは latexmath:[\perp] に属する。
+何故ならば，それ自身以外の何も影響を与えないから，中に latexmath:[\prep] 以外のどんな集合も含んではならない。
+
+
+==== 3つ以上の場合
+
+純粋な閉路ができる可能性がある。これについては「時間差」を常に考えなくてはならない。また，どのように組んでも順序は実行ごとに変わる。
+
+例えば以下のような影響グラフを考える
+
+[graphviz,scaledwidth=30]
+....
+digraph G {
+//  layout = circo
+//  layout = dot
+//  layout = fdp
+    layout = neato
+//  layout = osage
+//  layout = sfdp
+//  layout = twopi
+    d -> e [dir="both"]
+    f -> g [dir="both"]
+    a -> d
+    a -> b -> d -> f
+    c -> e-> g
+}
+....
+
+これは以下のようにも書ける。
+
+[graphviz,scaledwidth=30]
+....
+digraph G {
+    layout = neato
+    ⊥ -> a [label="a"]
+    ⊥ -> c [label="c"]
+    d -> e [dir="both", label="*"]
+    f -> g [dir="both", label="*"]
+    a -> d [label="d*"]
+    a -> b [label="b"]
+    b -> d [label="d"]
+    d -> f [label="f"]
+    c -> e [label="e"]
+    e -> g [label="g"]
+}
+....
+
+推移的関係は省略ができ，また双方向の関係を「次の時間の」何かに接続することで以下のようにできる気がするのでしてみる。
+二重の円で表現したノードは「戻る」ノード。これが何であるかは後々考える。
+
+[graphviz,scaledwidth=40]
+....
+digraph G {
+    layout = neato
+    "d'" [shape = doublecircle]
+    "e'" [shape = doublecircle]
+    "f'" [shape = doublecircle]
+    "g'" [shape = doublecircle]
+    ⊥ -> a [label="a"]
+    ⊥ -> c [label="c"]
+    d -> "e'" [label="*"]
+    e -> "d'" [label="*"]
+    f -> "g'" [label="*"]
+    g -> "f'" [label="*"]
+    a -> d [label="d*"]
+    a -> b [label="b"]
+    b -> d [label="d"]
+    d -> f [label="f"]
+    c -> e [label="e"]
+    e -> g [label="g"]
+    d -> e [style = invis]
+    f -> g [style = invis]
+}
+....
+
+ここで気になるのは
+
+. この「戻る」のは何であるか
+. 上のグラフのどれで考えるのが良さそうか
+
+辺りなので考えていく。
