@@ -13,9 +13,11 @@ include::setting.adoc[]
 == 基本アイデア
 include::sections/01_basic.adoc[]
 
-// == Chapter 2
-// include
+== 具体例で考える
+include::sections/02_example.adoc[]
 
+== 参考
+include::sections/90_reference.adoc[]
 
 :sectnums!:
 

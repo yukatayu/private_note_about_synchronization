@@ -214,9 +214,11 @@ nodeベース:: 必要な実装は？ +
 これら4通りがそれぞれどのような状態遷移図を持つのか考えると，
 
 「同期」： `msgはキューされる` ( `msg` を待つ):: 遷移とmsgが一対一対応の直線
-`msg`はキューされる ( `msg` を待たない):: 各 `status` は恒等射を持つ
-`msg` はキューされない ( `msg` を待つ):: 状態遷移を生成する `msg` は推移的 (ここで， latexmath:[g \circ f] は latexmath:[g] になる。分かりやすく書くと latexmath:[\xrightarrow{f} \circ \xrightarrow{g} = \xrightarrow{g}] )
-`msg` はキューされない ( `msg` を待たない):: 上記に加えて `status` が恒等射を持つ
+`msg` はキューされる ( `msg` を待たない):: 各 `status` は恒等射を持つ (様相論理のKT)
+`msg` はキューされない ( `msg` を待つ):: 状態遷移を生成する `msg` は推移的 (ここで， latexmath:[g \circ f] は latexmath:[g] になる。分かりやすく書くと latexmath:[\xrightarrow{f} \circ \xrightarrow{g} = \xrightarrow{g}] ) (対応する様相論理は不明)
+`msg` はキューされない ( `msg` を待たない):: 上記に加えて `status` が恒等射を持つ (様相論理のS4)
+
+※ 後々の話にはなるが，モデルが継続的かどうかも考慮すべきな気はする (場合によっては「行き詰まり」状態にならないことを保証したい)
 
 つまり，
 
